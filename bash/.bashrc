@@ -86,10 +86,6 @@ fi
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-# some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -147,6 +143,7 @@ PROMPT_COMMAND='EXIT_CODE=$?;
 ##############################################################
 
 alias chat="chatbang"
+alias v="nvim"
 
 # atbash cipher
 atbash() {
@@ -158,7 +155,7 @@ export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
 # alias name for path directory
-alias lcl="cd /media/ziad/Local\ Disk"
+alias lcl="cd /mnt/mydisk/"
 
 export PATH=$PATH:~/.local/bin
 
@@ -181,18 +178,12 @@ export PATH=/usr/local/go/bin:$PATH
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
-. "$HOME/.cargo/env"
-
 export PATH="$PATH:/opt/nvim"
-export PATH="$PATH:/opt/mssql-tools18/bin"
 
 function lazygit() {
     git add .
     git commit -a -m "$1"
-    git push # equivalent to: git push origin <current-branch-name [if branch not upstreamed yet then you'll got an error]
+    git push # equivalent to: git push origin <current-branch-name> [iff branch already upstreamed]
 }
 
 run() {
@@ -225,5 +216,3 @@ export PATH="$PATH:/usr/local/bin"
 alias v="nvim"
 export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
 
-alias t="tmux"
-alias so="source"
