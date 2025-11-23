@@ -15,7 +15,7 @@ exec_always --no-startup-id setxkbmap -layout us,ara -option grp:win_space_toggl
 #Mod4 super key 
 set $mod Mod4
 
-exec_always --no-startup-id picom --config ~/.config/picom/picom.conf
+# exec_always --no-startup-id picom --config ~/.config/picom/picom.conf
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 exec_always --no-startup-id i3-autolayout autolayout
 exec_always --no-startup-id sh -c "sleep 1 && xrandr --output HDMI-1-1 --mode 1920x1080 --above eDP"
