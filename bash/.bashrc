@@ -8,6 +8,8 @@ case $- in
 *) return ;;
 esac
 
+alias ls='ls -F'
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
@@ -74,7 +76,7 @@ esac
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=never'
+    # alias ls='ls --color=never'
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
 
@@ -154,7 +156,7 @@ export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
 # alias name for path directory
-alias lcl="cd /mnt/mydisk/"
+alias lcl="cd /mnt/localdisk/"
 
 export PATH=$PATH:~/.local/bin
 
@@ -184,6 +186,10 @@ function lazygit() {
     git commit -a -m "$1"
     git push # equivalent to: git push origin <current-branch-name> [iff branch already upstreamed]
 }
+
+# function lazyclone() {
+#     git clone git@github.com:$1 "$2"
+# }
 
 run() {
     file="$1"

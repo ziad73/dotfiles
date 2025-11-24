@@ -60,6 +60,13 @@ bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
 bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set 5%+
 
 
+# Night Light mode, you can generate visual polybar in future
+bindsym $mod+n exec --no-startup-id redshift -O 3500    # increase by 3500 
+bindsym $mod+Shift+n exec --no-startup-id redshift -x   # reset to normal
+
+# Start with warm color on boot
+exec --no-startup-id redshift -O 3500
+
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -253,8 +260,8 @@ assign [class="Google-chrome"] 2
 
 
 # Set default layout to tabbed in workspace 1 and 2
-for_window [workspace="1"] layout tabbed
-for_window [workspace="2"] layout tabbed
+# for_window [workspace="1"] layout tabbed
+# for_window [workspace="2"] layout tabbed
 
 
 #Startup apps
