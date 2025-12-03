@@ -8,7 +8,13 @@ case $- in
 *) return ;;
 esac
 
+# Enable Git tab completion
+source ~/.git-completion.bash
+
 alias ls='ls -F'
+
+# Open searched file(s) with nvim
+# alias vfzf='nvim $(fzf -m --preview="bat --color=always {}")' # click tab to select multiple files at once
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
@@ -181,15 +187,43 @@ export PATH=$PATH:$GOPATH/bin
 
 export PATH="$PATH:/opt/nvim"
 
+alias git-graph='git log --graph --decorate --oneline --all --abbrev-commit --color'
 function lazygit() {
-    git add .
+    git add -A
     git commit -a -m "$1"
-    git push # equivalent to: git push origin <current-branch-name> [iff branch already upstreamed]
+    # git push # equivalent to: git push origin <current-branch-name> [iff branch already upstreamed]
 }
 
 # function lazyclone() {
 #     git clone git@github.com:$1 "$2"
 # }
+
+compile() {
+    file="$1"
+    ext="${file##*.}"
+    name="${file%.*}"
+
+    case "$ext" in
+    cpp)
+        g++ "$file" -g -o "$name"
+        ;;
+    c)
+        gcc "$file" -g -o "$name"
+        ;;
+    java)
+        javac "$file"
+        ;;
+    py)
+        echo "Python does not require compilation."
+        ;;
+    go)
+        go build -o "$name" "$file"
+        ;;
+    *)
+        echo "Unsupported file type: $ext"
+        ;;
+    esac
+}
 
 run() {
     file="$1"
@@ -202,6 +236,7 @@ run() {
         ;;
     c)
         gcc "$file" -o "$name" && ./"$name"
+        # gcc "$file" -o "$name" # & ./"$name" just compile
         ;;
     java)
         javac "$file" && java "$name"
@@ -217,6 +252,38 @@ run() {
         ;;
     esac
 }
+
+open() {
+    file="$1"
+    ext="${file##*.}"
+    ext="${ext,,}" # lowercase
+
+    if [ ! -f "$1" ]; then
+        echo "File not found!"
+        return 1
+    fi
+    case "$ext" in
+    pdf)
+        evince "$file" &>/dev/null &
+        ;;
+    txt | md | log | cfg)
+        mousepad "$file" &>/dev/null &
+        ;;
+    mp4 | mkv | avi | mov | flv | wmv | webm)
+        vlc "$file" &>/dev/null &
+        ;;
+    mp3 | wav | ogg | flac)
+        vlc "$file" &>/dev/null &
+        ;;
+    jpg | jpeg | png | gif | bmp)
+        ristretto "$file" &>/dev/null &
+        ;;
+    *)
+        xdg-open "$file" &>/dev/null &
+        ;;
+    esac
+}
+
 export PATH="$PATH:/usr/local/bin"
 alias v="nvim"
 export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
@@ -225,3 +292,7 @@ export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
 if command -v tmux &>/dev/null && [ -z "$TMUX" ]; then
     tmux attach -t default || tmux new -s default
 fi
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion

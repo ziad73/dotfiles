@@ -21,12 +21,12 @@ Move windows:
   $mod+Shift+l / Shift+Right    Move right
 
 Resize mode keys:
+  $mod+r             Enter resize mode
+  Return / Escape    Exit resize mode
   h / Left           Shrink width
   j / Down           Grow height
   k / Up             Shrink height
   l / Right          Grow width
-  Return / Escape    Exit resize mode
-  $mod+r             Exit resize mode
 
 Workspaces:
   $mod+1–$mod+0      Switch workspaces 1–10

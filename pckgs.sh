@@ -3,3 +3,22 @@ sudo pacman -S vlc
 sudo pacman -S ffmpeg
 # chrome pdf viwer is enough
 # sudo pacman -S evince
+#  nvim $(fzf) open searched file in nvim
+sudo pacman -S fzf # exist in nvim(use it)
+sudo pacman -S vlc
+sudo pacman -S glow
+sudo pacman -S mousepad
+sudo pacman -S ristretto
+sudo pacman -S ripgrep
+sudo pacman -S cppcheck
+yay -S simplex-chat-bin
+yay -S discord # turn animation off
+sudo pacman -S man-db
+sudo pacman -S man-pages
+sudo pacman -S zsh
+sudo pacman -S zsh-completions zsh-syntax-highlighting zsh-autosuggestions
+sudo pacman -S bat
+sudo pacman -S zoxide
+sudo pacman -S xclip
+sudo pacman -S eza
+sudo pacman -S starship
