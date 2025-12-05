@@ -22,3 +22,8 @@ sudo pacman -S zoxide
 sudo pacman -S xclip
 sudo pacman -S eza
 sudo pacman -S starship
+
+# battery low warnings
+sudo pacman -S libnotify upower
+systemctl --user daemon-reload
+systemctl --user enable --now battery-notify.timer

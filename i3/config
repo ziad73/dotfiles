@@ -59,11 +59,6 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
 bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set 5%+
 
-
-# Night Light mode, you can generate visual polybar in future
-bindsym $mod+n exec --no-startup-id redshift -O 3500    # increase by 3500 
-bindsym $mod+Shift+n exec --no-startup-id redshift -x   # reset to normal
-
 # Start with warm color on boot
 exec --no-startup-id redshift -O 3500
 
@@ -293,3 +288,47 @@ bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 
 # Enable natural scrolling
 exec --no-startup-id xinput set-prop "ELAN0718:00 04F3:30FD Touchpad" "libinput Natural Scrolling Enabled" 1
+
+
+
+
+
+# === SYSTEM KEYS USING $mod + F1–F12 ===
+
+# F1 → Lock Screen
+# bindsym $mod+F1 exec --no-startup-id i3lock -c 000000
+
+# F2 → Reboot
+bindsym $mod+F2 exec --no-startup-id systemctl reboot
+
+# F3 → Sleep / Suspend
+bindsym $mod+F3 exec --no-startup-id systemctl suspend
+
+# F4 → Shutdown
+bindsym $mod+F4 exec --no-startup-id systemctl poweroff
+
+# F5 → Mute
+bindsym $mod+F5 exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+# F6 → Volume Down
+bindsym $mod+F6 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
+
+# F7 → Volume Up
+bindsym $mod+F7 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
+
+# F8 → Media Next (optional)
+# bindsym $mod+F8 exec --no-startup-id playerctl next
+
+# F9 → Brightness Down
+bindsym $mod+F9 exec --no-startup-id brightnessctl set 5%-
+
+# F10 → Brightness Up
+bindsym $mod+F10 exec --no-startup-id brightnessctl set 5%+
+
+# F11 → Night light +3500 
+bindsym $mod+F11 exec --no-startup-id redshift -O 3500    # increase by 3500 
+
+# F12 → Reset Night light
+bindsym $mod+F12 exec --no-startup-id redshift -x   # reset to normal
+
+

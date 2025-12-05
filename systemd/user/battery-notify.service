@@ -1,0 +1,7 @@
+[Unit]
+Description=Battery level checker using Rofi
+
+[Service]
+Type=oneshot
+ExecStart=%h/.config/battery-notify/check.sh
+
