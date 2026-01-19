@@ -9,7 +9,7 @@ case $- in
 esac
 
 # Enable Git tab completion
-source ~/.git-completion.bash
+# source ~/.git-completion.bash
 
 alias ls='ls -F'
 
@@ -166,20 +166,6 @@ alias lcl="cd /mnt/localdisk/"
 
 export PATH=$PATH:~/.local/bin
 
-# === ntfy shortcuts ===
-# Default topic name (you can change it anytime)
-export NTFY_TOPIC="ziad_test"
-
-# Publish to topic
-# alias npub='ntfy publish $NTFY_TOPIC'
-alias npub='ntfy publish' # first time add ziad_test
-
-# Subscribe to topic
-# alias nsub='ntfy subscribe $NTFY_TOPIC'
-alias nsub='ntfy subscribe' # first time add ziad_test
-
-alias ntopic='echo "Current ntfy topic: $NTFY_TOPIC"'
-
 # bottom overrides ups
 export PATH=/usr/local/go/bin:$PATH
 export GOPATH=$HOME/go
@@ -263,8 +249,9 @@ open() {
         return 1
     fi
     case "$ext" in
-    pdf)
-        evince "$file" &>/dev/null &
+    pdf | xopp)
+        # evince "$file" &>/dev/null &
+        xournalpp "$file" &>/dev/null &
         ;;
     txt | md | log | cfg)
         mousepad "$file" &>/dev/null &
@@ -296,3 +283,56 @@ fi
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+
+# --- PostgreSQL Shortcuts ---
+pg() {
+    case "$1" in
+    start)
+        sudo systemctl start postgresql
+        echo "PostgreSQL started."
+        ;;
+    stop)
+        sudo systemctl stop postgresql
+        echo "PostgreSQL stopped."
+        ;;
+    restart)
+        sudo systemctl restart postgresql
+        echo "PostgreSQL restarted."
+        ;;
+    status)
+        systemctl status postgresql
+        ;;
+    enable)
+        sudo systemctl enable postgresql
+        echo "PostgreSQL autostart enabled."
+        ;;
+    disable)
+        sudo systemctl disable postgresql
+        echo "PostgreSQL autostart disabled."
+        ;;
+    *)
+        echo "Usage: pg {start|stop|restart|status|enable|disable}"
+        ;;
+    esac
+}
+# --- End PostgreSQL Shortcuts ---
+
+# copy file into clipboard clip image.png
+# works well for img
+# text files copy its content
+# else ignored
+clip() {
+    if [[ ! -f "$1" ]]; then
+        echo "File not found: $1"
+        return 1
+    fi
+
+    # Detect MIME type (portable)
+    mime=$(file --mime-type -b "$1")
+
+    # Copy to clipboard with correct type
+    xclip -selection clipboard -t "$mime" -i "$1"
+
+    echo "Copied '$1' to clipboard as $mime"
+}
+export PATH=/home/ziad/.local/bin:/home/ziad/.nvm/versions/node/v24.11.1/bin:/home/ziad/.local/share/nvim/mason/bin:/usr/local/go/bin:/home/ziad/.local/share/nvim/mason/bin:/usr/local/go/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/local/go/bin:/home/ziad/go/bin:/home/ziad/.local/bin:/home/ziad/go/bin:/opt/nvim:/usr/local/bin:/usr/local/go/bin:/home/ziad/go/bin:/home/ziad/.local/bin:/home/ziad/go/bin:/opt/nvim:/usr/local/bin

@@ -12,7 +12,8 @@ sudo pacman -S ristretto
 sudo pacman -S ripgrep
 sudo pacman -S cppcheck
 yay -S simplex-chat-bin
-yay -S discord # turn animation off
+yay -S discord   # turn animation off
+sudo pacman -Syu # for update discord
 sudo pacman -S man-db
 sudo pacman -S man-pages
 sudo pacman -S zsh
@@ -27,3 +28,12 @@ sudo pacman -S starship
 sudo pacman -S libnotify upower
 systemctl --user daemon-reload
 systemctl --user enable --now battery-notify.timer
+
+sudo pacman -S xournalpp
+
+sudo pacman -S yt-dlp
+sudo pacman -S ffmpeg
+
+sudo pacman -S rclone
+sudo pacman -S xorg-xev
+sudo pacman -S xdotool
